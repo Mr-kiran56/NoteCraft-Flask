@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoteCraft - Update Note</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color:#B0E0E6;  ;" class=" d-flex justify-content-center align-items-center vh-100">
+
+  <form style="width: 100%; max-width: 600px; height: 700px; background-color: black; color: aliceblue;" 
+        class="p-4 shadow  rounded-4" 
+        action="/update/{{ note.Sno }}" 
+        method="post" 
+        enctype="multipart/form-data">
+
+    <h2 class="mb-4 text-center">Update Your Notes</h2>
+
+    <div class="mb-3">
+      <label for="noteTitle" class="form-label">Title</label>
+      <input type="text" class="form-control" id="noteTitle" name="title" placeholder="Enter your note title" value="{{ note.Title }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="noteDescription" class="form-label">Description</label>
+      <textarea class="form-control" id="noteDescription" name="description" rows="3" required>{{ note.Description }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Add/Replace Picture</label>
+      <input type="file" class="form-control" name="image" accept="image/*">
+      {% if note.Image %}
+        <div class="mt-3 text-center">
+          <img src="{{ url_for('static', filename='uploads/' ~ note.Image) }}" class="img-fluid rounded" style="width: 100%; max-height: 220px; " alt="Note Image">
+        </div>
+      {% endif %}
+    </div>
+
+    <button type="submit" style="background-color:#FF7F50 ; color: white;" class="btn  w-100 mt-3">Update Note</button>
+
+  </form>
+
+</body>
+</html>
